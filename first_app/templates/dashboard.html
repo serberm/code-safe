@@ -1,62 +1,114 @@
- <!DOCTYPE html>
-  <html>
-    <head>
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Dashboard</title>
+  {% load static %}	
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Dashboard</title>
-    </head>
-    <body>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo right">Dashboard</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <a href="/create" class="waves-effect waves-light btn-small"><i class="material-icons left">create</i>New Post</a>
+          <li class='right'>Hello {{user.name}} :)</li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 
-      <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Dashboard</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
-          </ul>
-        </div>
-      </nav>
-
-
-      <div class="row">
-        <div class="col m4">
-          <div class="card blue-grey darken-1 hoverable">
-            <div class="card-content white-text">
-              <span class="card-title">Card Title</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        
+    
+ 
+  <div class="row">
+    
+    {% for card in all_cards %}
+      {% if not card.image == "Null" %}
         <div class="col m4">
           <div class="card hoverable">
             <div class="card-image">
-              <img src="https://image.shutterstock.com/image-photo/white-transparent-leaf-on-mirror-600w-1029171697.jpg">
-              <span class="card-title">Card Title</span>
-              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
+                <img src={{card.image}} alt="image" style="height:300px;width:100%;object-fit:cover;">
+                <span class="card-title">{{card.title}}</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red" href='/edit/{{card.id}}'><i class="material-icons">add</i></a>
+              </div>
+              <div class="card-content">
+                <p>{{card.content}}</p>
+              </div>
+            {% if not card.link == 'Null' %}
+              <div class="card-action">
+                <a href={{card.link}}>Link</a>
+              </div>
+            {% endif %}
           </div>
         </div>
+      {% else %}
+        <div class="col m4">
+          <div class="card blue-grey darken-1 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">{{card.title}}</span>
+              <p>{{card.content}}</p>
+            </div>
+            <div class="card-image">
+              <a class="btn-floating halfway-fab waves-effect waves-light red" href='/edit/{{card.id}}'><i class="material-icons">add</i></a>
+            </div>
+            {% if not card.link == 'Null' %}
+              <div class="card-action">
+                <a href={{card.link}}>Link</a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+  
+
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Helpful links</h5>
+          <p class="grey-text text-lighten-4">Solemnly swear that this web page was created for fun only. Fell free to post and upload any cools staff starting with awesome home recipies to study material for future teachers! Privacy is protected with a knowledge of cutes doggo on earth.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">More Links</h5>
+          <ul>
+            <li><a class="white-text" href="/users">Users</a></li>
+            <li><a class="white-text" href="/logout">Logout</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Bugs, ideas, constructive criticism?</a></li>
+            <li><a class="white-text" href="https://www.google.com/">Questions?</a></li>
+            <li><a class="white-text" href="https://andriiivanytskyi.herokuapp.com/">About creator</a></li>
+          </ul>
+        </div>
       </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="https://andriiivanytskyi.herokuapp.com/">Andrii</a>
+      </div>
+    </div>
+  </footer>
 
-      <!--JavaScript at end of body for optimized loading-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    </body>
-  </html>
 
+  <!--  Scripts-->
+  <script src="{% static 'https://code.jquery.com/jquery-2.1.1.min.js' %}"></script>
+  <script src="{% static 'js/materialize.js' %}"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+
+  </body>
+</html>

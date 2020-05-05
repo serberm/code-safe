@@ -1,0 +1,37 @@
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Users</title>
+    </head>
+
+    <body>
+      <h1 class="red-text text-lighten-2">Users</h1>
+      <table>
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Number of posts</th>
+          </tr>
+        </thead>
+
+        {% for user in all_users %}
+          <tbody>
+            <tr>
+              <td>{{user.name}}</td>
+              <td>#</td>
+            </tr>
+          </tbody>
+        {% endfor %}
+      </table>
+
+      <!--JavaScript at end of body for optimized loading-->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+  </html>
