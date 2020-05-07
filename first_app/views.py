@@ -137,7 +137,8 @@ def bugs_ideas(request):
     return redirect('/login')
   else:
     context = {
-      'all_bugs_ideas': Idea_Bug.objects.all()
+      'all_bugs_ideas': Idea_Bug.objects.all(),
+      'all_comments': Comment.objects.all()
     }
     return render(request, 'bugs_ideas.html', context)
 
@@ -157,6 +158,20 @@ def bugs_ideads_processing(request):
     idea = idea
     )
   new_bug_idea.save()
+
+  return redirect('/bugs_ideas')
+
+def bugs_ideads_comment_processing(reuqest, id):
+  current_user = User.objects.get(id=reuqest.session['user_id'])
+  content = reuqest.POST['content']
+  post = Idea_Bug.objects.get(id=id)
+
+  new_comment = Comment(
+    author = current_user,
+    post = post,
+    content = content
+  )
+  new_comment.save()
 
   return redirect('/bugs_ideas')
 
