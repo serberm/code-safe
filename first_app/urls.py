@@ -14,4 +14,6 @@ urlpatterns = [
   path('edit_processing/<int:id>', views.edit_processing),
   path('logout', views.logout),
   path('users', views.users),
+  path('bugs_ideas', views.bugs_ideas),
+  path('bugs_ideads_processing', views.bugs_ideads_processing),
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Card
+from .models import User, Card, Idea_Bug, Comment
 
 
 SECRET_ANSWER = 'Lady'
@@ -131,5 +131,33 @@ def users(request):
       'all_users': User.objects.all()
     }
     return render(request, 'users.html', context)
+
+def bugs_ideas(request):
+  if not request.session['logged']:
+    return redirect('/login')
+  else:
+    context = {
+      'all_bugs_ideas': Idea_Bug.objects.all()
+    }
+    return render(request, 'bugs_ideas.html', context)
+
+def bugs_ideads_processing(request):
+  current_user = User.objects.get(id=request.session['user_id'])
+  content = request.POST['content']
+  bug_or_idea = request.POST['bug_or_idea']
+
+  if bug_or_idea == 'idea':
+    idea = True
+  else:
+    idea = False
+
+  new_bug_idea = Idea_Bug(
+    author = current_user,
+    content=content,
+    idea = idea
+    )
+  new_bug_idea.save()
+
+  return redirect('/bugs_ideas')
 
   
