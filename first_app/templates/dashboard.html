@@ -35,7 +35,11 @@
             <div class="card-image">
                 <img src={{card.image}} alt="image" style="height:300px;width:100%;object-fit:cover;">
                 <span class="card-title">{{card.title}}</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light red" href='/edit/{{card.id}}'><i class="material-icons">add</i></a>
+                <a data-target='dropdown{{card.id}}' class="dropdown-trigger btn-floating halfway-fab waves-effect waves-light red" ><i class="material-icons">dehaze</i></a>
+                <ul id='dropdown{{card.id}}' class='dropdown-content'>
+                  <li><a style='color:red;' href="edit/{{card.id}}"><i class="material-icons">add</i>Edit</a></li>
+                  <li><a style='color:red;' href="delete_card_processing/{{card.id}}"><i class="material-icons">delete</i>Delete</a></li>
+                </ul>
               </div>
               <div class="card-content">
                 <p>{{card.content}}</p>
@@ -55,7 +59,11 @@
               <p>{{card.content}}</p>
             </div>
             <div class="card-image">
-              <a class="btn-floating halfway-fab waves-effect waves-light red" href='/edit/{{card.id}}'><i class="material-icons">add</i></a>
+              <a data-target='dropdown{{card.id}}' class="dropdown-trigger btn-floating halfway-fab waves-effect waves-light red" ><i class="material-icons">dehaze</i></a>
+                <ul id='dropdown{{card.id}}' class='dropdown-content'>
+                  <li><a style='color:red;' href="edit/{{card.id}}"><i class="material-icons">add</i>Edit</a></li>
+                  <li><a style='color:red;' href="delete_card_processing/{{card.id}}"><i class="material-icons">delete</i>Delete</a></li>
+                </ul>
             </div>
             {% if not card.link == 'Null' %}
               <div class="card-action">
@@ -106,9 +114,13 @@
 
 
   <!--  Scripts-->
-  <script src="{% static 'https://code.jquery.com/jquery-2.1.1.min.js' %}"></script>
-  <script src="{% static 'js/materialize.js' %}"></script>
-  <script src="{% static 'js/init.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+     document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems, {});
+      });
+  </script>
 
   </body>
 </html>

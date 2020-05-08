@@ -17,4 +17,7 @@ urlpatterns = [
   path('bugs_ideas', views.bugs_ideas),
   path('bugs_ideads_processing', views.bugs_ideads_processing),
   path('bugs_ideads_comment_processing/<int:id>', views.bugs_ideads_comment_processing),
+  path('delete_idea_bug_processing/<int:id>', views.delete_idea_bug_processing),
+  path('delete_comment_processing/<int:id>', views.delete_comment_processing),
+  path('delete_card_processing/<int:id>', views.delete_card_processing),
 ]

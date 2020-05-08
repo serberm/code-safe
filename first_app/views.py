@@ -175,4 +175,23 @@ def bugs_ideads_comment_processing(reuqest, id):
 
   return redirect('/bugs_ideas')
 
+def delete_idea_bug_processing(request,id):
+  idea_bug_to_delete = Idea_Bug.objects.get(id=id)
+  idea_bug_to_delete.delete()
+
+  return redirect('/bugs_ideas')
+
+def delete_comment_processing(request, id):
+  comment_to_delete = Comment.objects.get(id=id)
+  comment_to_delete.delete()
+
+  return redirect('/bugs_ideas')
+
+def delete_card_processing(request, id):
+  card_to_delete = Card.objects.get(id=id)
+  card_to_delete.delete()
+
+  return redirect('/dashboard')
+
+
   
